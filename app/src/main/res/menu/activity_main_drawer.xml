@@ -5,33 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_visao_geral"
+            android:icon="@drawable/ic_overview_24dp"
+            android:title="@string/visao_geral" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_extrato"
+            android:icon="@drawable/ic_extrato_24dp"
+            android:title="@string/extrato" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/cartao_type">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_bluecard"
+                android:icon="@drawable/ic_blue_card_24dp"
+                android:title="@string/bluecard" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_greencard"
+                android:icon="@drawable/ic_green_card_24dp"
+                android:title="@string/greencard" />
         </menu>
     </item>
 
