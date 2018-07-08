@@ -52,7 +52,7 @@ public class VisaoGeralCard implements RequestComplete{
         progressBar.setVisibility(View.GONE);
         layoutConteudo.setVisibility(View.VISIBLE);
         updateSaldo();
-        // instancia cartao
+        new CreditCardCard(activity, portadorAtual.getPortadorAtual());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class VisaoGeralCard implements RequestComplete{
         } else {
             Toast.makeText(activity, activity.getText(R.string.saldo_update_error), Toast.LENGTH_SHORT).show();
             updateSaldo();
-            // instancia cartao
+            new CreditCardCard(activity, portadorAtual.getPortadorAtual());
         }
 
     }

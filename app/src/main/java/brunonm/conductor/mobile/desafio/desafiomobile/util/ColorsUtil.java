@@ -5,8 +5,13 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +34,8 @@ public class ColorsUtil {
             window.setStatusBarColor(baseColors.get(SECONDARY_COLOR));
         }
         setNavMenuItemThemeColors(activity, navigationView);
+        setCardColor(activity);
+        setNavHeaderColor(activity, prefs);
     }
 
     private static Map<String, Integer> getBaseColor(CartaoTipo cartaoTipo, Activity activity) {
@@ -97,5 +104,42 @@ public class ColorsUtil {
 
         navigationView.setItemTextColor(navMenuTextList);
         navigationView.setItemIconTintList(navMenuIconList);
+    }
+
+    public static void setCardColor(Activity activity) {
+        Preferencias prefs = new Preferencias(activity);
+        LinearLayout cardView = activity.findViewById(R.id.credit_card_layout);
+        if (cardView != null) {
+            ImageView imageLogo = activity.findViewById(R.id.logo_image);
+
+            switch (prefs.pegarCartaoTipo()) {
+                case BLUE_CARD:
+                    cardView.setBackground(ActivityCompat.getDrawable(activity, R.drawable.blue_card_background));
+                    imageLogo.setImageDrawable(ActivityCompat.getDrawable(activity, R.drawable.mastercard_logo));
+                    break;
+                case GREEN_CARD:
+                    cardView.setBackground(ActivityCompat.getDrawable(activity, R.drawable.green_card_background));
+                    imageLogo.setImageDrawable(ActivityCompat.getDrawable(activity, R.drawable.visa_logo));
+                    break;
+            }
+
+        }
+    }
+
+    private static void setNavHeaderColor(Activity activity, Preferencias prefs) {
+        LinearLayout navHeader = activity.findViewById(R.id.nav_header);
+        if (navHeader != null) {
+            switch (prefs.pegarCartaoTipo()) {
+                case BLUE_CARD:
+                    navHeader.setBackground(ActivityCompat.getDrawable(activity,
+                            R.drawable.blue_card_background));
+                    break;
+                case GREEN_CARD:
+                    navHeader.setBackground(ActivityCompat.getDrawable(activity,
+                            R.drawable.green_card_background));
+                    break;
+            }
+
+        }
     }
 }

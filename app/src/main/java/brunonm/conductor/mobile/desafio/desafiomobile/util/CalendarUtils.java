@@ -10,7 +10,7 @@ import java.util.Locale;
 public class CalendarUtils {
 
     public static Calendar getCaledar(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.getDefault());
         Calendar calendar = new GregorianCalendar();
         try {
             Date data = sdf.parse(date);

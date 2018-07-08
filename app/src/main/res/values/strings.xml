@@ -18,6 +18,10 @@
     <string name="zero_balance">R$0,00</string>
     <string name="saldo_update_error">Não foi possivel atualizar o Saldo</string>
     <string name="networ_error">Não foi possive obter as informações do servidor.</string>
+    <string name="logo">logo</string>
+    <string name="card_overlay">xxxx xxxx xxxx 0000</string>
+    <string name="date_ovelay">06/18</string>
+    <string name="nome_overlay">Nome overlay</string>
 
     <string-array name="months">
         <item>Janeiro</item>
