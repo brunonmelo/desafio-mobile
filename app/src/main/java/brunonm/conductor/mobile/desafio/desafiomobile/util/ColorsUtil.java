@@ -1,7 +1,6 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.util;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;

@@ -11,9 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import brunonm.conductor.mobile.desafio.desafiomobile.ExtratoActivity;
-import brunonm.conductor.mobile.desafio.desafiomobile.MainActivity;
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
+import brunonm.conductor.mobile.desafio.desafiomobile.activities.ExtratoActivity;
+import brunonm.conductor.mobile.desafio.desafiomobile.activities.MainActivity;
 import brunonm.conductor.mobile.desafio.desafiomobile.enums.CartaoTipo;
 
 public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,13 +89,11 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
 
     // Chamada no onResume da activity para setar as cores basicas e o item selecionado;
     public void onResume() {
-        Log.d("debug", "onResume: " + activity.getComponentName().getShortClassName());
         if (isOnMain()) {
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (isOnExtrato()) {
             navigationView.getMenu().getItem(1).setChecked(true);
         }
-
         ColorsUtil.setToolbarBackgroundColors(activity, toolbar, navigationView);
     }
 
