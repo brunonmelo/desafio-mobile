@@ -2,10 +2,13 @@ package brunonm.conductor.mobile.desafio.desafiomobile.singletons;
 
 import android.util.SparseArray;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.models.Compras;
 
@@ -19,7 +22,6 @@ public class ExtratoData {
     public static ExtratoData getInstance() {
         return ourInstance;
     }
-
 
     public void updateComprasSet(Collection<Compras> compras, int page) {
         List<Compras> comprasList = comprasMap.get(page);
@@ -70,7 +72,7 @@ public class ExtratoData {
     public int getCurrentAno() {
         if (currentAno == -1) {
             Calendar calendar = Calendar.getInstance();
-            calendar.get(Calendar.YEAR);
+            setCurrentAno(calendar.get(Calendar.YEAR));
         }
         return currentAno;
     }
@@ -79,4 +81,22 @@ public class ExtratoData {
         return comprasMap.size();
     }
 
+    public Map<String, Double> getMapValues() {
+        Map<String, Double> valuesMap = new HashMap<>();
+        for(int i = 0; i < comprasMap.size(); i++) {
+            int key = comprasMap.keyAt(i);
+            // get the object by the key.
+            List<Compras> comprasList = comprasMap.get(key);
+            for (Compras compra : comprasList) {
+                if(valuesMap.get(compra.getLoja()) == null){
+                    valuesMap.put(compra.getLoja(), compra.getValue());
+                } else {
+                    Double aDouble = valuesMap.get(compra.getLoja());
+                    BigDecimal valorSomado = new BigDecimal(aDouble).add(new BigDecimal(compra.getValue()));
+                    valuesMap.put(compra.getLoja(), valorSomado.doubleValue());
+                }
+            }
+        }
+        return valuesMap;
+    }
 }

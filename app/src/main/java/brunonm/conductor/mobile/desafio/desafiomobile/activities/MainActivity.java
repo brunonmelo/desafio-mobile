@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
+import brunonm.conductor.mobile.desafio.desafiomobile.cards.ChartCard;
 import brunonm.conductor.mobile.desafio.desafiomobile.cards.VisaoGeralCard;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.LayoutLoader;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.NavegationDrawerUtil;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private NavegationDrawerUtil navegationDrawerUtil;
     private VisaoGeralCard visaoGeralCard;
+    private ChartCard chartCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         navegationDrawerUtil = new NavegationDrawerUtil(this, toolbar);
 
         visaoGeralCard = new VisaoGeralCard(this);
+        chartCard = new ChartCard(this);
     }
 
     @Override
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // atualiza valores no onResume
         visaoGeralCard.onResume();
         navegationDrawerUtil.onResume();
+        chartCard.onResume();
     }
 
     @Override

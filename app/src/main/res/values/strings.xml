@@ -17,6 +17,7 @@
     <string name="saldo">Saldo</string>
     <string name="zero_balance">R$0,00</string>
     <string name="saldo_update_error">Não foi possivel atualizar o Saldo</string>
+    <string name="extrato_update_error">Não foi possivel atualizar o Extrato</string>
     <string name="networ_error">Não foi possive obter as informações do servidor.</string>
     <string name="logo">logo</string>
     <string name="card_overlay" tools:ignore="Typos">xxxx xxxx xxxx 0000</string>
