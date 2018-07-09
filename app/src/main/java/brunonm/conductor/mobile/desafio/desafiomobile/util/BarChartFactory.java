@@ -1,7 +1,7 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.util;
 
 import android.app.Activity;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -28,7 +28,6 @@ public class BarChartFactory {
     public BarChartFactory(Activity activity) {
         this.activity = activity;
         mChart = activity.findViewById(R.id.chart);
-//        new BarEntry()
     }
 
     public void updateData() {
@@ -46,32 +45,27 @@ public class BarChartFactory {
         setXValue(xList);
 
         BarDataSet set1;
-        if (mChart.getData() != null &&
-                mChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setValues(entries);
-            mChart.getData().notifyDataChanged();
-            mChart.notifyDataSetChanged();
-            mChart.invalidate();
-        } else {
-            String[] monthArray = activity.getResources().getStringArray(R.array.months);
-            String label = monthArray[extratoData.getCurrentMes() - 1] +
-                    " - " + extratoData.getCurrentAno();
-            set1 = new BarDataSet(entries, label);
-            set1.setDrawIcons(false);
+        set1 = new BarDataSet(entries, getLabel(extratoData));
+        set1.setDrawIcons(false);
 
-            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
 
-            BarData data = new BarData(dataSets);
-            data.setValueTextSize(10f);
-            data.setBarWidth(0.9f);
+        BarData data = new BarData(dataSets);
+        data.setValueTextSize(10f);
+        data.setBarWidth(0.9f);
 
-            mChart.setData(data);
+        mChart.setData(data);
+        mChart.setFitBars(true); // make the x-axis fit exactly all bars
+        mChart.invalidate();
 
-            mChart.setFitBars(true); // make the x-axis fit exactly all bars
-            mChart.invalidate();
-        }
+    }
+
+    @NonNull
+    private String getLabel(ExtratoData extratoData) {
+        String[] monthArray = activity.getResources().getStringArray(R.array.months);
+        return monthArray[extratoData.getCurrentMes() - 1] +
+                " - " + extratoData.getCurrentAno();
     }
 
     private void setXValue(SparseArray<String> xList) {
