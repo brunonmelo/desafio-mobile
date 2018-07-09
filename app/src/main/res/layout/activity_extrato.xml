@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExtratoActivity">
+    tools:context=".activities.ExtratoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -18,16 +18,23 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <include layout="@layout/toolbar_paginacao_control" />
+
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_extrato" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_lista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/text_erro_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/networ_error"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

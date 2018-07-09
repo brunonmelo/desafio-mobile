@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Desafio Mobile Conductor</string>
     <string name="navigation_drawer_open">Abrir navigation drawer</string>
     <string name="navigation_drawer_close">Fechar navigation drawer</string>
@@ -12,16 +12,22 @@
     <string name="greencard">GreenCard</string>
     <string name="visao_geral">Visão Geral</string>
     <string name="extrato">Extrato</string>
-    <string name="title_activity_extrato">ExtratoActivity</string>
+    <string name="title_activity_extrato">Extrato</string>
     <string name="overview">Visão Geral</string>
     <string name="saldo">Saldo</string>
     <string name="zero_balance">R$0,00</string>
     <string name="saldo_update_error">Não foi possivel atualizar o Saldo</string>
     <string name="networ_error">Não foi possive obter as informações do servidor.</string>
     <string name="logo">logo</string>
-    <string name="card_overlay">xxxx xxxx xxxx 0000</string>
+    <string name="card_overlay" tools:ignore="Typos">xxxx xxxx xxxx 0000</string>
     <string name="date_ovelay">06/18</string>
     <string name="nome_overlay">Nome overlay</string>
+    <string name="back">Volta</string>
+    <string name="forward">Avança</string>
+    <string name="pagination_number_oberlay">1/…</string>
+    <string name="paginator_marcador">{0}/{1}</string>
+    <string name="descricao">descricao</string>
+    <string name="loja">loja</string>
 
     <string-array name="months">
         <item>Janeiro</item>

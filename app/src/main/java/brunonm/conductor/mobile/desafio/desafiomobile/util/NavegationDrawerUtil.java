@@ -15,6 +15,7 @@ import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.activities.ExtratoActivity;
 import brunonm.conductor.mobile.desafio.desafiomobile.activities.MainActivity;
 import brunonm.conductor.mobile.desafio.desafiomobile.enums.CartaoTipo;
+import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.AcaoConcluida;
 
 public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,6 +24,7 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
     private final AppCompatActivity activity;
     private final Toolbar toolbar;
     private final NavigationView navigationView;
+    private AcaoConcluida acaoConcluida;
 
     public NavegationDrawerUtil(AppCompatActivity activity, Toolbar toolbar) {
         this.activity = activity;
@@ -68,10 +70,16 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
             case R.id.nav_bluecard:
                 prefs.salvarCartaoTipo(CartaoTipo.BLUE_CARD.getId());
                 ColorsUtil.setToolbarBackgroundColors(activity, toolbar, navigationView);
+                if(acaoConcluida != null) {
+                    acaoConcluida.acaoConcluidaCallback();
+                }
                 break;
             case R.id.nav_greencard:
                 prefs.salvarCartaoTipo(CartaoTipo.GREEN_CARD.getId());
                 ColorsUtil.setToolbarBackgroundColors(activity, toolbar, navigationView);
+                if(acaoConcluida != null) {
+                    acaoConcluida.acaoConcluidaCallback();
+                }
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -103,5 +111,9 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
 
     private boolean isOnExtrato() {
         return activity.getComponentName().getShortClassName().equals(".ExtratoActivity");
+    }
+
+    public void onUpdate(AcaoConcluida acaoConcluida) {
+        this.acaoConcluida = acaoConcluida;
     }
 }

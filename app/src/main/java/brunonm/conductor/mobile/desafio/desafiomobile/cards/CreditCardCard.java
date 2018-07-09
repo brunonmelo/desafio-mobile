@@ -2,25 +2,15 @@ package brunonm.conductor.mobile.desafio.desafiomobile.cards;
 
 import android.app.Activity;
 import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
-import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.RequestComplete;
 import brunonm.conductor.mobile.desafio.desafiomobile.models.Portador;
-import brunonm.conductor.mobile.desafio.desafiomobile.networkusage.ResquestUtils;
-import brunonm.conductor.mobile.desafio.desafiomobile.singletons.PortadorAtual;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.ColorsUtil;
-import brunonm.conductor.mobile.desafio.desafiomobile.util.StringUtils;
 
 public class CreditCardCard {
 
@@ -38,7 +28,6 @@ public class CreditCardCard {
 
     private String getDataValidade(Portador portador) {
         DateFormat df = new SimpleDateFormat("MM/yy", Locale.getDefault()); // Just the year, with 2 digits
-        Log.d("debug", "getDataValidade: portador " + portador.toString());
         return df.format(portador.getExpirationDate().getTime());
     }
 

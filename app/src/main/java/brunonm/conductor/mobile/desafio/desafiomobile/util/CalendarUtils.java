@@ -1,22 +1,25 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CalendarUtils {
 
     public static Calendar getCaledar(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.getDefault());
-        Calendar calendar = new GregorianCalendar();
-        try {
-            Date data = sdf.parse(date);
-            calendar.setTime(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        Pattern pattern = Pattern.compile("(\\d{4})-(\\d+)-(\\d+)T(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{3})Z");
+        Matcher matcher = pattern.matcher(date);
+
+        Calendar calendar = Calendar.getInstance();
+
+        while (matcher.find()) {
+            calendar.set(Calendar.YEAR, Integer.parseInt(matcher.group(1)));
+            calendar.set(Calendar.MONTH, Integer.parseInt(matcher.group(2)) - 1);
+            calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(matcher.group(3)));
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(matcher.group(4)));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(matcher.group(5)));
+            calendar.set(Calendar.SECOND, Integer.parseInt(matcher.group(6)));
+            calendar.set(Calendar.MILLISECOND, Integer.parseInt(matcher.group(7)));
         }
         return calendar;
     }

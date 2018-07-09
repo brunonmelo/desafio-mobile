@@ -13,7 +13,7 @@ public class Extrato {
     private SparseArray<List<Compras>> comprasMap = new SparseArray<>();
     private int currentMes = -1;
     private int currentAno = -1;
-    private int pagesNumber;
+    private int pagesNumber = -1;
 
     public static Extrato getInstance() {
         return ourInstance;
@@ -28,24 +28,28 @@ public class Extrato {
         comprasMap.put(page, comprasList);
     }
 
-    public List<Compras> getComprasSet(int page) {
+    public List<Compras> getComprasList(int page) {
         return comprasMap.get(page);
-    }
-
-    public boolean isToUpdate(int mes, int ano) {
-        return mes != currentMes || ano != currentAno;
     }
 
     public void setCurrentMes(String currentMes) {
         int mesInt = Integer.parseInt(currentMes);
-        if(mesInt != this.currentMes) comprasMap.clear();
+        if(mesInt != this.currentMes) {
+            limpaDados();
+        }
         this.currentMes = mesInt;
     }
 
     public void setCurrentAno(String currentAno) {
         int anoInt = Integer.parseInt(currentAno);
-        if(anoInt != this.currentAno) comprasMap.clear();
+        if(anoInt != this.currentAno) {
+            limpaDados();
+        }
         this.currentAno = anoInt;
+    }
+
+    private void limpaDados() {
+        comprasMap.clear();
     }
 
     public void setPagesNumber(int pagesNumber) {
@@ -55,4 +59,13 @@ public class Extrato {
     public int getPagesNumber() {
         return pagesNumber;
     }
+
+    public String getCurrentMes() {
+        return String.valueOf(currentMes);
+    }
+
+    public String getCurrentAno() {
+        return String.valueOf(currentAno);
+    }
+
 }

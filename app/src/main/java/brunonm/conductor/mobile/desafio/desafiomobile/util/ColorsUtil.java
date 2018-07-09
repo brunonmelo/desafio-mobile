@@ -6,9 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +34,7 @@ public class ColorsUtil {
         setNavMenuItemThemeColors(activity, navigationView);
         setCardColor(activity);
         setNavHeaderColor(activity, prefs);
+        setToolbarNavigatorColor(activity, cartaoTipo);
     }
 
     private static Map<String, Integer> getBaseColor(CartaoTipo cartaoTipo, Activity activity) {
@@ -141,5 +140,20 @@ public class ColorsUtil {
             }
 
         }
+    }
+
+    private static void setToolbarNavigatorColor(Activity activity, CartaoTipo cartaoTipo) {
+        Toolbar toolbar = activity.findViewById(R.id.toolbarDate);
+        Map<String, Integer> baseColors = getBaseColor(cartaoTipo, activity);
+        if(toolbar != null) {
+            toolbar.setBackgroundColor(baseColors.get(PRIMARY_COLOR));
+        }
+    }
+
+    public static int getMarcadorColor(Activity activity) {
+        Preferencias prefs = new Preferencias(activity);
+        CartaoTipo cartaoTipo = prefs.pegarCartaoTipo();
+        Map<String, Integer> baseColors = getBaseColor(cartaoTipo, activity);
+        return baseColors.get(PRIMARY_COLOR);
     }
 }

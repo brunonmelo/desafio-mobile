@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.RequestComplete;
-import brunonm.conductor.mobile.desafio.desafiomobile.networkusage.ResquestUtils;
+import brunonm.conductor.mobile.desafio.desafiomobile.networkusage.RequestUtils;
 import brunonm.conductor.mobile.desafio.desafiomobile.singletons.PortadorAtual;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.StringUtils;
 
@@ -41,7 +41,7 @@ public class VisaoGeralCard implements RequestComplete{
 
     public void onResume() {
         if (portadorAtual.getPortadorAtual() == null) {
-            ResquestUtils.updatePortador(this);
+            RequestUtils.updatePortador(this);
         } else {
             onSuccess();
         }

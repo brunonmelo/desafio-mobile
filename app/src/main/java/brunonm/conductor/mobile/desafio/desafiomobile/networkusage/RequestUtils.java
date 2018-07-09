@@ -17,7 +17,7 @@ import brunonm.conductor.mobile.desafio.desafiomobile.singletons.Extrato;
 import brunonm.conductor.mobile.desafio.desafiomobile.singletons.PortadorAtual;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.StringUtils;
 
-public class ResquestUtils {
+public class RequestUtils {
     private static final String PORTADOR_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/users/profile";
     private static final String SALDO_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/resume";
     private static final String EXTRATO_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/card-statement";
@@ -26,11 +26,11 @@ public class ResquestUtils {
         new RequestPortadorESaldoAsyncTask(requestComplete).execute();
     }
 
-    public static void updateExtrato(RequestComplete requestComplete, String mes, String ano) {
+    public static void updateExtrato(RequestComplete requestComplete, String mes, String ano, int page) {
         Extrato extratoInstance = Extrato.getInstance();
         extratoInstance.setCurrentMes(mes);
         extratoInstance.setCurrentAno(ano);
-        new RequestUpdateExtrato(requestComplete,  1, mes, ano).execute();
+        new RequestUpdateExtrato(requestComplete, page, mes, ano).execute();
     }
 
     private static class RequestPortadorESaldoAsyncTask extends AsyncTask<Void, Void, String[]> {
@@ -108,7 +108,6 @@ public class ResquestUtils {
 
         @Override
         protected String doInBackground(Void... voids) {
-            Log.d("debug", "doInBackground: request page " + requestsPage);
             RequestPackage rpExtrato = new RequestPackage();
             rpExtrato.setUri(EXTRATO_URI);
             rpExtrato.setParams("month", mes);
