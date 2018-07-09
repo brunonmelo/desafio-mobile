@@ -40,12 +40,26 @@ public class Extrato {
         this.currentMes = mesInt;
     }
 
+    public void setCurrentMes(int currentMes) {
+        if(currentMes != this.currentMes) {
+            limpaDados();
+        }
+        this.currentMes = currentMes;
+    }
+
     public void setCurrentAno(String currentAno) {
         int anoInt = Integer.parseInt(currentAno);
         if(anoInt != this.currentAno) {
             limpaDados();
         }
         this.currentAno = anoInt;
+    }
+
+    public void setCurrentAno(int currentAno) {
+        if(currentAno != this.currentAno) {
+            limpaDados();
+        }
+        this.currentAno = currentAno;
     }
 
     private void limpaDados() {

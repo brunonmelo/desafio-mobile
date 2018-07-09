@@ -43,7 +43,6 @@ public class ExtratoItemAdapter extends RecyclerView.Adapter<ExtratoItemAdapter.
         Compras compras = extratoList.get(position);
         DateFormat df = new SimpleDateFormat("dd MMM", Locale.getDefault()); // Just the year, with 2 digits
 
-        Log.d("debug", "onBindViewHolder: date " + compras.getDate());
         holder.textData.setText(df.format(compras.getDate().getTime()));
         holder.textDescricao.setText(compras.getDescricao());
         holder.textLoja.setText(compras.getLoja());

@@ -106,11 +106,11 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
     }
 
     private boolean isOnMain() {
-        return activity.getComponentName().getShortClassName().equals(".MainActivity");
+        return activity.getComponentName().getShortClassName().contains(".MainActivity");
     }
 
     private boolean isOnExtrato() {
-        return activity.getComponentName().getShortClassName().equals(".ExtratoActivity");
+        return activity.getComponentName().getShortClassName().contains(".ExtratoActivity");
     }
 
     public void onUpdate(AcaoConcluida acaoConcluida) {

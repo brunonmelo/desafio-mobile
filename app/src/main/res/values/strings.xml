@@ -28,6 +28,17 @@
     <string name="paginator_marcador">{0}/{1}</string>
     <string name="descricao">descricao</string>
     <string name="loja">loja</string>
+    <string name="filtro">Filtro</string>
+    <string name="carteira">Carteira</string>
+    <string name="grafico">Gráfico</string>
+    <string name="filtro_dialog_text">Selecione a data e o ano</string>
+    <string name="filtro_dialog_title">Filtro Data</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ano">Ano:</string>
+    <string name="mes">mês:</string>
+    <string name="aguarde">Aguarde...</string>
+    <string name="atualizando">Atualizando</string>
 
     <string-array name="months">
         <item>Janeiro</item>

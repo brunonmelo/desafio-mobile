@@ -1,10 +1,12 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,6 +16,8 @@ import java.util.Calendar;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.adapter.ExtratoPagerAdapter;
+import brunonm.conductor.mobile.desafio.desafiomobile.fragment.FiltroDialogFragment;
+import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.AcaoConcluida;
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.RequestComplete;
 import brunonm.conductor.mobile.desafio.desafiomobile.networkusage.RequestUtils;
 import brunonm.conductor.mobile.desafio.desafiomobile.singletons.Extrato;
@@ -29,6 +33,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     private ImageButton buttonBack;
     private ImageButton buttonForward;
     private TextView textPaginationData;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +56,51 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
 
     private void setupButtonsListeners() {
         buttonForward.setOnClickListener(view -> {
-            if(Extrato.getInstance().getPagesNumber() > itemAtual){
+            if (Extrato.getInstance().getPagesNumber() > itemAtual) {
                 itemAtual++;
                 updatePage();
             }
         });
         buttonBack.setOnClickListener(view -> {
-            if(itemAtual > 1){
+            if (itemAtual > 1) {
                 itemAtual--;
                 updatePage();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_extrato, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_carteira:
+
+                return true;
+            case R.id.menu_grafico:
+
+                return true;
+            case R.id.menu_filtro:
+                FiltroDialogFragment filtroDialogFragment =
+                        FiltroDialogFragment.newInstance((AcaoConcluida) () -> {
+                            showProgressDialog();
+                            Extrato extratoInstance = Extrato.getInstance();
+                            RequestUtils.updateExtrato(this,
+                                    extratoInstance.getCurrentMes(),
+                                    extratoInstance.getCurrentAno(),
+                                    1);
+                            itemAtual = 1;
+                        });
+                filtroDialogFragment.show(getSupportFragmentManager(), "filtro_extrato");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setupViewPage() {
@@ -96,22 +135,9 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
         super.onResume();
         navegationDrawerUtil.onResume();
 
-//        RequestUtils.updatePortador(new RequestComplete() {
-//            @Override
-//            public void onSuccess() {
-//                Log.d("debug", "onSuccess: updatePortador ");
-//                Log.d("debug", "onSuccess: portador " + PortadorAtual.getInstance().getPortadorAtual().toString());
-//            }
-//
-//            @Override
-//            public void onFail() {
-//                Log.d("debug", "onFail: updatePortador ");
-//            }
-//        });
-
-        Calendar calendar = Calendar.getInstance();
-
         if (Extrato.getInstance().getComprasList(itemAtual) == null) {
+            Calendar calendar = Calendar.getInstance();
+
             RequestUtils.updateExtrato(this,
                     String.valueOf(calendar.get(Calendar.MONTH) + 1),
                     String.valueOf(calendar.get(Calendar.YEAR)),
@@ -122,7 +148,6 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     }
 
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -131,6 +156,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
 
     @Override
     public void onSuccess() {
+        dismissProgressDialog();
         setupViewPage();
     }
 
@@ -138,5 +164,23 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     public void onFail() {
         mViewPager.setVisibility(View.GONE);
         textErroMsg.setVisibility(View.VISIBLE);
+        dismissProgressDialog();
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle(getString(R.string.aguarde));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setMessage(getString(R.string.atualizando));
+            progressDialog.show();
+        }
+    }
+
+    private void dismissProgressDialog() {
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 }

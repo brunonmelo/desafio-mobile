@@ -1,5 +1,7 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.interfaces;
 
-public interface AcaoConcluida {
+import java.io.Serializable;
+
+public interface AcaoConcluida extends Serializable {
     void acaoConcluidaCallback();
 }

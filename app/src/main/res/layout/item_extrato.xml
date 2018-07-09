@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <View
         android:id="@+id/view_extrato_marcador"
         android:layout_width="4dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorBluePrimary"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintHorizontal_bias="0.0"
-        card_view:layout_constraintLeft_toLeftOf="parent"
-        card_view:layout_constraintRight_toRightOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent"
-        card_view:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/text_data"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:gravity="center|start"
-        android:text="@string/date_ovelay"
-        android:textColor="@android:color/black"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintLeft_toRightOf="@+id/view_extrato_marcador"
-        card_view:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/colorBluePrimary" />
 
+    <TextView
+        android:id="@+id/text_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center|start"
+        android:text="@string/date_ovelay" />
 
     <LinearLayout
         android:id="@+id/text_layout"
@@ -46,10 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintLeft_toRightOf="@+id/text_data"
-        card_view:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_descricao"
@@ -65,8 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|start"
-            android:text="@string/loja"
-            android:textColor="@android:color/black" />
+            android:text="@string/loja" />
     </LinearLayout>
 
 
@@ -81,15 +66,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
-        android:maxEms="12"
+        android:maxEms="6"
         android:maxLines="1"
         android:text="@string/zero_balance"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintHorizontal_bias="1.0"
-        card_view:layout_constraintLeft_toRightOf="@+id/text_layout"
-        card_view:layout_constraintRight_toRightOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent" />
+        android:textSize="21sp" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
