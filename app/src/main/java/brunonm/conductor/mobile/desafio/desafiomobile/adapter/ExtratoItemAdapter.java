@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +70,7 @@ public class ExtratoItemAdapter extends RecyclerView.Adapter<ExtratoItemAdapter.
             textDescricao = itemView.findViewById(R.id.text_descricao);
             textLoja = itemView.findViewById(R.id.text_loja);
             textValor = itemView.findViewById(R.id.text_valor);
-            marcador = itemView.findViewById(R.id.view_extrato_marcador);
+            marcador = itemView.findViewById(R.id.view_marcador);
         }
     }
 

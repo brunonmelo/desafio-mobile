@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import brunonm.conductor.mobile.desafio.desafiomobile.adapter.ExtratoItemAdapter
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.RequestComplete;
 import brunonm.conductor.mobile.desafio.desafiomobile.models.Compras;
 import brunonm.conductor.mobile.desafio.desafiomobile.networkusage.RequestUtils;
-import brunonm.conductor.mobile.desafio.desafiomobile.singletons.Extrato;
+import brunonm.conductor.mobile.desafio.desafiomobile.singletons.ExtratoData;
 
 public class ExtratoFragment extends Fragment implements RequestComplete {
     private LinearLayout layoutSpinner;
@@ -48,10 +47,9 @@ public class ExtratoFragment extends Fragment implements RequestComplete {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         extratoList.setLayoutManager(layoutManager);
 
-        Extrato extratoInstance = Extrato.getInstance();
-        if (extratoInstance.getComprasList(position) == null) {
-            RequestUtils.updateExtrato(this, extratoInstance.getCurrentMes(),
-                    extratoInstance.getCurrentAno(), position);
+        ExtratoData extratoDataInstance = ExtratoData.getInstance();
+        if (extratoDataInstance.getComprasList(position) == null) {
+            RequestUtils.updateExtrato(this, position, false);
         } else{
             updateLayout();
         }
@@ -69,7 +67,7 @@ public class ExtratoFragment extends Fragment implements RequestComplete {
         extratoList.setVisibility(View.VISIBLE);
 
         comprasList.clear();
-        comprasList.addAll(Extrato.getInstance().getComprasList(position));
+        comprasList.addAll(ExtratoData.getInstance().getComprasList(position));
         recyclerViewAdapter.notifyDataSetChanged();
     }
 

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.fragment.ExtratoFragment;
-import brunonm.conductor.mobile.desafio.desafiomobile.singletons.Extrato;
+import brunonm.conductor.mobile.desafio.desafiomobile.singletons.ExtratoData;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.SmartFragmentStatePagerAdapter;
 
 public class ExtratoPagerAdapter extends SmartFragmentStatePagerAdapter {
@@ -21,6 +21,6 @@ public class ExtratoPagerAdapter extends SmartFragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return Extrato.getInstance().getPagesNumber();
+        return ExtratoData.getInstance().getPagesNumber();
     }
 }

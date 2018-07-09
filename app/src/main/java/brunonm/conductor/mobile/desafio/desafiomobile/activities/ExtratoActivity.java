@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.MessageFormat;
-import java.util.Calendar;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.adapter.ExtratoPagerAdapter;
@@ -20,7 +19,7 @@ import brunonm.conductor.mobile.desafio.desafiomobile.fragment.FiltroDialogFragm
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.AcaoConcluida;
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.RequestComplete;
 import brunonm.conductor.mobile.desafio.desafiomobile.networkusage.RequestUtils;
-import brunonm.conductor.mobile.desafio.desafiomobile.singletons.Extrato;
+import brunonm.conductor.mobile.desafio.desafiomobile.singletons.ExtratoData;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.LayoutLoader;
 import brunonm.conductor.mobile.desafio.desafiomobile.util.NavegationDrawerUtil;
 
@@ -56,7 +55,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
 
     private void setupButtonsListeners() {
         buttonForward.setOnClickListener(view -> {
-            if (Extrato.getInstance().getPagesNumber() > itemAtual) {
+            if (ExtratoData.getInstance().getPagesNumber() > itemAtual) {
                 itemAtual++;
                 updatePage();
             }
@@ -89,11 +88,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
                 FiltroDialogFragment filtroDialogFragment =
                         FiltroDialogFragment.newInstance((AcaoConcluida) () -> {
                             showProgressDialog();
-                            Extrato extratoInstance = Extrato.getInstance();
-                            RequestUtils.updateExtrato(this,
-                                    extratoInstance.getCurrentMes(),
-                                    extratoInstance.getCurrentAno(),
-                                    1);
+                            RequestUtils.updateExtrato(this, 1, false);
                             itemAtual = 1;
                         });
                 filtroDialogFragment.show(getSupportFragmentManager(), "filtro_extrato");
@@ -126,7 +121,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     }
 
     private void updatePage() {
-        textPaginationData.setText(MessageFormat.format(getString(R.string.paginator_marcador), itemAtual, Extrato.getInstance().getPagesNumber()));
+        textPaginationData.setText(MessageFormat.format(getString(R.string.paginator_marcador), itemAtual, ExtratoData.getInstance().getPagesNumber()));
         mViewPager.setCurrentItem(itemAtual - 1);
     }
 
@@ -135,13 +130,8 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
         super.onResume();
         navegationDrawerUtil.onResume();
 
-        if (Extrato.getInstance().getComprasList(itemAtual) == null) {
-            Calendar calendar = Calendar.getInstance();
-
-            RequestUtils.updateExtrato(this,
-                    String.valueOf(calendar.get(Calendar.MONTH) + 1),
-                    String.valueOf(calendar.get(Calendar.YEAR)),
-                    1);
+        if (ExtratoData.getInstance().getComprasList(itemAtual) == null) {
+            RequestUtils.updateExtrato(this,1, false);
         } else {
             setupViewPage();
         }
@@ -178,7 +168,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     }
 
     private void dismissProgressDialog() {
-        if(progressDialog != null) {
+        if (progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null;
         }

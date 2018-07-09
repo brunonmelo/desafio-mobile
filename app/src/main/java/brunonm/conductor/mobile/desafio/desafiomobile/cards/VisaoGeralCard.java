@@ -30,7 +30,7 @@ public class VisaoGeralCard implements RequestComplete{
         Calendar dataAtual = Calendar.getInstance();
         portadorAtual = PortadorAtual.getInstance();
 
-        TextView overviewTextView = activity.findViewById(R.id.TextView_current_balance);
+        TextView overviewTextView = activity.findViewById(R.id.text_title);
         textSaldoAtual = activity.findViewById(R.id.text_saldo_atual);
         textErroMsg = activity.findViewById(R.id.text_erro_msg);
         progressBar = activity.findViewById(R.id.progress_bar);

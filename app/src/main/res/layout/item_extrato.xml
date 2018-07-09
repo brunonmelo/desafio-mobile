@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <View
-        android:id="@+id/view_extrato_marcador"
+        android:id="@+id/view_marcador"
         android:layout_width="4dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="16dp"

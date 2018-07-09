@@ -21,7 +21,6 @@ public enum CartaoTipo {
         this.descricao = descricao;
     }
 
-
     public int getId() {
         return id;
     }

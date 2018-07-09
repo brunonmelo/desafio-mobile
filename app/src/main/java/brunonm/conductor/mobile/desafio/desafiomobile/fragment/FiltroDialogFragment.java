@@ -16,7 +16,7 @@ import java.util.List;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.AcaoConcluida;
-import brunonm.conductor.mobile.desafio.desafiomobile.singletons.Extrato;
+import brunonm.conductor.mobile.desafio.desafiomobile.singletons.ExtratoData;
 
 public class FiltroDialogFragment extends DialogFragment {
 
@@ -49,9 +49,9 @@ public class FiltroDialogFragment extends DialogFragment {
         builder.setTitle(R.string.filtro_dialog_title);
         builder.setMessage(R.string.filtro_dialog_text);
         builder.setPositiveButton(R.string.confirmar, (dialogInterface, i) -> {
-            Extrato extratoInstance = Extrato.getInstance();
-            extratoInstance.setCurrentAno((Integer) spinnerAno.getSelectedItem());
-            extratoInstance.setCurrentMes(spinnerMes.getSelectedItemPosition() + 1);
+            ExtratoData extratoDataInstance = ExtratoData.getInstance();
+            extratoDataInstance.setCurrentAno((Integer) spinnerAno.getSelectedItem());
+            extratoDataInstance.setCurrentMes(spinnerMes.getSelectedItemPosition() + 1);
             callback.acaoConcluidaCallback();
         });
         builder.setNegativeButton(R.string.cancelar, null);
@@ -74,7 +74,7 @@ public class FiltroDialogFragment extends DialogFragment {
 
         dataAnoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAno.setAdapter(dataAnoAdapter);
-        int currentAno = Integer.parseInt(Extrato.getInstance().getCurrentAno());
+        int currentAno = ExtratoData.getInstance().getCurrentAno();
         spinnerAno.setSelection(listAnos.indexOf(currentAno));
     }
 
@@ -89,7 +89,7 @@ public class FiltroDialogFragment extends DialogFragment {
         dataMesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMes.setAdapter(dataMesAdapter);
 
-        int currentMes = Integer.parseInt(Extrato.getInstance().getCurrentMes());
+        int currentMes = ExtratoData.getInstance().getCurrentMes();
         spinnerMes.setSelection(currentMes - 1);
     }
 }

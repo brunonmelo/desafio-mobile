@@ -138,7 +138,6 @@ public class ColorsUtil {
                             R.drawable.green_card_background));
                     break;
             }
-
         }
     }
 

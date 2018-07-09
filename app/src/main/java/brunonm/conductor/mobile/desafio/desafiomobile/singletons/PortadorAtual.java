@@ -10,10 +10,6 @@ public class PortadorAtual {
         return ourInstance;
     }
 
-    public static PortadorAtual getOurInstance() {
-        return ourInstance;
-    }
-
     public Portador getPortadorAtual() {
         return portador;
     }
