@@ -38,7 +38,6 @@ public class BarChartFactory {
         int i = 1;
         entries.clear();
         for (Map.Entry<String, Double> entry : mapValues.entrySet()) {
-            Log.d("debug", "updateData: " + entry.getKey() + "/" + entry.getValue());
             entries.add(new BarEntry(i, entry.getValue().floatValue()));
             xList.put(i, entry.getKey());
             i++;

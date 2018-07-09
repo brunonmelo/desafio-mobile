@@ -15,29 +15,36 @@
         android:paddingBottom="16dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif"
-            android:paddingBottom="4dp"
-            android:paddingTop="8dp"
-            android:text="@string/grafico"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-
-        <View
-            android:id="@+id/view_marcador"
+        <LinearLayout
+            android:id="@+id/layout_title_chart"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="4dp"
+                android:paddingTop="8dp"
+                android:text="@string/grafico"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <View
+                android:id="@+id/view_marcador"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/darker_gray" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar_chart"

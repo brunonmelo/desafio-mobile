@@ -22,19 +22,38 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_lista"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_marginTop="110dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_erro_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:text="@string/networ_error"
-        android:visibility="gone" />
+        <include
+            android:id="@+id/card_cartao_view"
+            android:visibility="gone"
+            layout="@layout/card_main_overview" />
+
+        <include
+            android:id="@+id/card_chart_view"
+            android:visibility="gone"
+            layout="@layout/card_main_chart" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_lista"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <TextView
+            android:id="@+id/text_erro_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/networ_error"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

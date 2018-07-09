@@ -15,6 +15,8 @@ import java.text.MessageFormat;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.adapter.ExtratoPagerAdapter;
+import brunonm.conductor.mobile.desafio.desafiomobile.cards.ChartCard;
+import brunonm.conductor.mobile.desafio.desafiomobile.cards.VisaoGeralCard;
 import brunonm.conductor.mobile.desafio.desafiomobile.fragment.FiltroDialogFragment;
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.AcaoConcluida;
 import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.RequestComplete;
@@ -33,6 +35,12 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     private ImageButton buttonForward;
     private TextView textPaginationData;
     private ProgressDialog progressDialog;
+    private VisaoGeralCard visaoGeralCard;
+    private ChartCard chartCard;
+    private boolean chartVisible = false;
+    private boolean overviewVisible = false;
+    private View cardChartView;
+    private View cardOverviewView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +54,19 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
         buttonBack = findViewById(R.id.button_back);
         buttonForward = findViewById(R.id.button_forward);
         textPaginationData = findViewById(R.id.text_pagination_data);
+        cardChartView = findViewById(R.id.card_chart_view);
+        cardOverviewView = findViewById(R.id.card_cartao_view);
 
         setSupportActionBar(toolbar);
         setupButtonsListeners();
         navegationDrawerUtil = new NavegationDrawerUtil(this, toolbar);
         navegationDrawerUtil.onUpdate(this::setupViewPage);
+
+        visaoGeralCard = new VisaoGeralCard(this);
+        chartCard = new ChartCard(this);
+
+        visaoGeralCard.hideTitle();
+        chartCard.hideTitle();
     }
 
     private void setupButtonsListeners() {
@@ -79,10 +95,14 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_carteira:
-
+                chartVisible = false;
+                overviewVisible = !overviewVisible;
+                updateViews();
                 return true;
             case R.id.menu_grafico:
-
+                overviewVisible = false;
+                chartVisible = !chartVisible;
+                updateViews();
                 return true;
             case R.id.menu_filtro:
                 FiltroDialogFragment filtroDialogFragment =
@@ -95,6 +115,19 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void updateViews() {
+        if(chartVisible) {
+            cardChartView.setVisibility(View.VISIBLE);
+        } else {
+            cardChartView.setVisibility(View.GONE);
+        }
+        if(overviewVisible) {
+            cardOverviewView.setVisibility(View.VISIBLE);
+        } else {
+            cardOverviewView.setVisibility(View.GONE);
         }
     }
 
@@ -129,6 +162,8 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     protected void onResume() {
         super.onResume();
         navegationDrawerUtil.onResume();
+        visaoGeralCard.onResume();
+        chartCard.onResume();
 
         if (ExtratoData.getInstance().getComprasList(itemAtual) == null) {
             RequestUtils.updateExtrato(this,1, false);
@@ -148,6 +183,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
     public void onSuccess() {
         dismissProgressDialog();
         setupViewPage();
+        chartCard.onResume();
     }
 
     @Override

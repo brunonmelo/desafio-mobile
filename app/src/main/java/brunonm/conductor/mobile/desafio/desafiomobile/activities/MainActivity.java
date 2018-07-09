@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // atualiza valores no onResume
-        visaoGeralCard.onResume();
         navegationDrawerUtil.onResume();
+        visaoGeralCard.onResume();
         chartCard.onResume();
     }
 

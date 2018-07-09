@@ -26,12 +26,14 @@ public class ChartCard implements RequestComplete{
     private final LinearLayout layoutConteudo;
     private final TextView textErroMsg;
     private final BarChartFactory barChartFactory;
+    private final LinearLayout layoutTitleChart;
 
     public ChartCard(Activity activity) {
         this.activity = activity;
         textErroMsg = activity.findViewById(R.id.text_erro_msg_chart);
         progressBar = activity.findViewById(R.id.progress_bar_chart);
         layoutConteudo = activity.findViewById(R.id.layout_conteudo_chart);
+        layoutTitleChart = activity.findViewById(R.id.layout_title_chart);
 
         barChartFactory = new BarChartFactory(activity);
     }
@@ -64,4 +66,7 @@ public class ChartCard implements RequestComplete{
 
     }
 
+    public void hideTitle() {
+        layoutTitleChart.setVisibility(View.GONE);
+    }
 }

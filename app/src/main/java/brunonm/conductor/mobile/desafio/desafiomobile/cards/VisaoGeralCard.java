@@ -24,6 +24,7 @@ public class VisaoGeralCard implements RequestComplete{
     private final Activity activity;
     private final TextView textErroMsg;
     private final TextView textSaldoAtual;
+    private final LinearLayout layoutTitleOverview;
 
     public VisaoGeralCard(Activity activity) {
         this.activity = activity;
@@ -35,6 +36,7 @@ public class VisaoGeralCard implements RequestComplete{
         textErroMsg = activity.findViewById(R.id.text_erro_msg);
         progressBar = activity.findViewById(R.id.progress_bar);
         layoutConteudo = activity.findViewById(R.id.layout_conteudo);
+        layoutTitleOverview = activity.findViewById(R.id.layout_title_overview);
 
         overviewTextView.setText(StringUtils.getOverviewText(activity, dataAtual.get(Calendar.MONTH)));
     }
@@ -71,5 +73,9 @@ public class VisaoGeralCard implements RequestComplete{
     private void updateSaldo() {
         String valorEmReais = NumberFormat.getCurrencyInstance().format(portadorAtual.getPortadorAtual().getSaldo());
         textSaldoAtual.setText(valorEmReais);
+    }
+
+    public void hideTitle() {
+        layoutTitleOverview.setVisibility(View.GONE);
     }
 }
