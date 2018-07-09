@@ -1,5 +1,22 @@
 # desafio-mobile
 
+### Considerações
+Olá esse foi um excelente projeto para testar as habilidades, tanto para construção e setup de uma aplicação do zero como para trabalhar com diversas funcionalidade.
+Desde consumir uma API, montar páginas complexas com fragment e paginação e para trabalhar com bibliotecas de terceiro.
+Estou muito satisfeito com o resultado alcançado e espero que agradem vocês.
+
+### Como executar o projeto
+Esse é um típico projeto criado no Android Studio, então para executa-lo, basta importa-lo no Android Studio, esperar buildar e execultar em um emulador ou em um device Android com depuração usb ativa.
+Mais detalhes do link : https://github.com/dogriffiths/HeadFirstAndroid/wiki/How-to-open-a-project-in-Android-Studio
+
+Caso deseje rodar o projeto direto por linha de comando, eu recomendo seguir as instruções do link: https://developer.android.com/studio/build/building-cmdline?hl=pt-br 
+
+### Descrição da aplicação
+O aplicativo apresenta duas telas, a tela inicial com uma visão geral, onde mostra um resumo das informações do mês atual e uma tela de extrato, onde é possível filtrar os dados por data e ainda ter visão rápida do gráfico ou das informações do usuário.
+
+
+## Texto original do Desafio Conductor de Seleção
+
 ### Desafio Conductor de Seleção 
 Olá, queremos convidá-lo a participar de nosso desafio de seleção.  Pronto para participar? Seu trabalho será visto por nosso time e você receberá ao final um feedback sobre o que achamos do seu trabalho. Não é legal?
 
@@ -39,13 +56,13 @@ Deverá consumir a seguinte api: https://documenter.getpostman.com/view/313904/R
 
   - iOS:
   
-      ![alt text](https://github.com/marketpayconductor/desafio-mobile/blob/master/iPhone%206-7-8%20%E2%80%93%201.png)
-      ![alt text](https://github.com/marketpayconductor/desafio-mobile/blob/master/iPhone%206-7-8%20%E2%80%93%202.png)
+      ![alt text](https://github.com/brunonmelo/desafio-mobile/blob/master/iPhone%206-7-8%20%E2%80%93%201.png)
+      ![alt text](https://github.com/brunonmelo/desafio-mobile/blob/master/iPhone%206-7-8%20%E2%80%93%202.png)
       
   - Android:
   
-    ![alt text](https://github.com/marketpayconductor/desafio-mobile/blob/master/Android%20Mobile%20%E2%80%93%201.png)
-    ![alt text](https://github.com/marketpayconductor/desafio-mobile/blob/master/Android%20Mobile%20%E2%80%93%202.png)
+    ![alt text](https://github.com/brunonmelo/desafio-mobile/blob/master/Android%20Mobile%20%E2%80%93%201.png)
+    ![alt text](https://github.com/brunonmelo/desafio-mobile/blob/master/Android%20Mobile%20%E2%80%93%202.png)
 
 ### Instruções
       1. Faça o fork do desafio;
