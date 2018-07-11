@@ -60,7 +60,6 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
         setSupportActionBar(toolbar);
         setupButtonsListeners();
         navegationDrawerUtil = new NavegationDrawerUtil(this, toolbar);
-        navegationDrawerUtil.onUpdate(this::setupViewPage);
 
         visaoGeralCard = new VisaoGeralCard(this);
         chartCard = new ChartCard(this);

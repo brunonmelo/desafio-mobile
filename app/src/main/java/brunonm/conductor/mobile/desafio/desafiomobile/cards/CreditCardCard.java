@@ -1,7 +1,6 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.cards;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -10,7 +9,6 @@ import java.util.Locale;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.models.Portador;
-import brunonm.conductor.mobile.desafio.desafiomobile.util.ColorsUtil;
 
 public class CreditCardCard {
 
@@ -18,8 +16,6 @@ public class CreditCardCard {
         TextView textCardNumber = activity.findViewById(R.id.text_card_number);
         TextView textCardValidade = activity.findViewById(R.id.text_card_validade);
         TextView textCardName = activity.findViewById(R.id.text_card_name);
-
-        ColorsUtil.setCardColor(activity);
 
         textCardName.setText(portador.getNome());
         textCardValidade.setText(getDataValidade(portador));

@@ -5,7 +5,7 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <View
+    <ImageView
         android:id="@+id/view_marcador"
         android:layout_width="4dp"
         android:layout_height="match_parent"
@@ -13,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/colorBluePrimary" />
+        android:src="@drawable/vermelho"/>
 
     <TextView
         android:id="@+id/text_data"

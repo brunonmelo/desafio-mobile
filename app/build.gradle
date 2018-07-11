@@ -16,6 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions 'tier'
+    productFlavors {
+        blueCard {
+            dimension "tier"
+            applicationIdSuffix ".blue"
+        }
+        greenCard {
+            dimension "tier"
+            applicationIdSuffix ".green"
+        }
+    }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -17,15 +17,12 @@ import java.util.Locale;
 
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.models.Compras;
-import brunonm.conductor.mobile.desafio.desafiomobile.util.ColorsUtil;
 
 public class ExtratoItemAdapter extends RecyclerView.Adapter<ExtratoItemAdapter.ViewHolder> {
     private final List<Compras> extratoList;
     private final LayoutInflater mLayoutInflater;
-    private final Activity activity;
 
     public ExtratoItemAdapter(Activity activity, List<Compras> extratoList) {
-        this.activity = activity;
         this.extratoList = extratoList;
         mLayoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -48,7 +45,6 @@ public class ExtratoItemAdapter extends RecyclerView.Adapter<ExtratoItemAdapter.
         holder.textValor.setText(String.valueOf(NumberFormat
                 .getCurrencyInstance()
                 .format(compras.getValue())));
-        holder.marcador.setBackgroundColor(ColorsUtil.getMarcadorColor(activity));
     }
 
     @Override
@@ -61,7 +57,6 @@ public class ExtratoItemAdapter extends RecyclerView.Adapter<ExtratoItemAdapter.
         private TextView textDescricao;
         private TextView textLoja;
         private TextView textValor;
-        private View marcador;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +65,6 @@ public class ExtratoItemAdapter extends RecyclerView.Adapter<ExtratoItemAdapter.
             textDescricao = itemView.findViewById(R.id.text_descricao);
             textLoja = itemView.findViewById(R.id.text_loja);
             textValor = itemView.findViewById(R.id.text_valor);
-            marcador = itemView.findViewById(R.id.view_marcador);
         }
     }
 

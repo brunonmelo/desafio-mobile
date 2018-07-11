@@ -14,17 +14,4 @@
             android:title="@string/extrato" />
     </group>
 
-    <item android:title="@string/cartao_type">
-        <menu>
-            <item
-                android:id="@+id/nav_bluecard"
-                android:icon="@drawable/ic_blue_card_24dp"
-                android:title="@string/bluecard" />
-            <item
-                android:id="@+id/nav_greencard"
-                android:icon="@drawable/ic_green_card_24dp"
-                android:title="@string/greencard" />
-        </menu>
-    </item>
-
 </menu>

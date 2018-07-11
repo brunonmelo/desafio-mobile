@@ -1,8 +1,11 @@
 package brunonm.conductor.mobile.desafio.desafiomobile.util;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,21 +16,15 @@ import android.view.MenuItem;
 import brunonm.conductor.mobile.desafio.desafiomobile.R;
 import brunonm.conductor.mobile.desafio.desafiomobile.activities.ExtratoActivity;
 import brunonm.conductor.mobile.desafio.desafiomobile.activities.MainActivity;
-import brunonm.conductor.mobile.desafio.desafiomobile.enums.CartaoTipo;
-import brunonm.conductor.mobile.desafio.desafiomobile.interfaces.AcaoConcluida;
 
 public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSelectedListener {
 
     private final DrawerLayout drawer;
-    private final Preferencias prefs;
     private final AppCompatActivity activity;
-    private final Toolbar toolbar;
     private final NavigationView navigationView;
-    private AcaoConcluida acaoConcluida;
 
     public NavegationDrawerUtil(AppCompatActivity activity, Toolbar toolbar) {
         this.activity = activity;
-        this.toolbar = toolbar;
 
         drawer = activity.findViewById(R.id.drawer_layout);
 
@@ -45,7 +42,7 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        prefs = new Preferencias(activity);
+        setNavMenuItemThemeColors();
     }
 
     @Override
@@ -64,20 +61,6 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
                 if (!isOnExtrato()) {
                     Intent intent = new Intent(activity, ExtratoActivity.class);
                     activity.startActivity(intent);
-                }
-                break;
-            case R.id.nav_bluecard:
-                prefs.salvarCartaoTipo(CartaoTipo.BLUE_CARD.getId());
-                ColorsUtil.setToolbarBackgroundColors(activity, toolbar, navigationView);
-                if(acaoConcluida != null) {
-                    acaoConcluida.acaoConcluidaCallback();
-                }
-                break;
-            case R.id.nav_greencard:
-                prefs.salvarCartaoTipo(CartaoTipo.GREEN_CARD.getId());
-                ColorsUtil.setToolbarBackgroundColors(activity, toolbar, navigationView);
-                if(acaoConcluida != null) {
-                    acaoConcluida.acaoConcluidaCallback();
                 }
                 break;
         }
@@ -101,7 +84,6 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
         } else if (isOnExtrato()) {
             navigationView.getMenu().getItem(1).setChecked(true);
         }
-        ColorsUtil.setToolbarBackgroundColors(activity, toolbar, navigationView);
     }
 
     private boolean isOnMain() {
@@ -112,7 +94,50 @@ public class NavegationDrawerUtil implements NavigationView.OnNavigationItemSele
         return activity.getComponentName().getShortClassName().contains(".ExtratoActivity");
     }
 
-    public void onUpdate(AcaoConcluida acaoConcluida) {
-        this.acaoConcluida = acaoConcluida;
+    private void setNavMenuItemThemeColors() {
+
+        //Setting default colors for menu item Text and Icon
+        int navDefaultTextColor = Color.parseColor("#202020");
+        int navDefaultIconColor = Color.parseColor("#737373");
+        int color = ActivityCompat.getColor(activity, R.color.colorPrimary);
+
+        //Defining ColorStateList for menu item Text
+        ColorStateList navMenuTextList = new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_checked},
+                        new int[]{android.R.attr.state_enabled},
+                        new int[]{android.R.attr.state_pressed},
+                        new int[]{android.R.attr.state_focused},
+                        new int[]{android.R.attr.state_pressed}
+                },
+                new int[]{
+                        color,
+                        navDefaultTextColor,
+                        navDefaultTextColor,
+                        navDefaultTextColor,
+                        navDefaultTextColor
+                }
+        );
+
+        //Defining ColorStateList for menu item Icon
+        ColorStateList navMenuIconList = new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_checked},
+                        new int[]{android.R.attr.state_enabled},
+                        new int[]{android.R.attr.state_pressed},
+                        new int[]{android.R.attr.state_focused},
+                        new int[]{android.R.attr.state_pressed}
+                },
+                new int[]{
+                        color,
+                        navDefaultIconColor,
+                        navDefaultIconColor,
+                        navDefaultIconColor,
+                        navDefaultIconColor
+                }
+        );
+
+        navigationView.setItemTextColor(navMenuTextList);
+        navigationView.setItemIconTintList(navMenuIconList);
     }
 }
