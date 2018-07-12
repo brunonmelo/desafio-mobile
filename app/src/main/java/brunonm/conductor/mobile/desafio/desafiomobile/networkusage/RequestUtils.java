@@ -21,13 +21,18 @@ public class RequestUtils {
     private static final String PORTADOR_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/users/profile";
     private static final String SALDO_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/resume";
     private static final String EXTRATO_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/card-statement";
+    private static final String USO_CARTAO_URI = "https://2hm1e5siv9.execute-api.us-east-1.amazonaws.com/dev/card-usage";
 
     public static void updatePortador(RequestComplete requestComplete) {
         new RequestPortadorESaldoAsyncTask(requestComplete).execute();
     }
 
-    public static void updateExtrato(RequestComplete requestComplete, int page, boolean updateAll) {
-        new RequestUpdateExtrato(requestComplete, page, updateAll).execute();
+    public static void updateExtrato(RequestComplete requestComplete, int page) {
+        new RequestUpdateExtrato(requestComplete, page).execute();
+    }
+
+    public static void updateUsoCartao(RequestComplete requestComplete) {
+        new RequestUsoCartao(requestComplete).execute();
     }
 
     private static class RequestPortadorESaldoAsyncTask extends AsyncTask<Void, Void, String[]> {
@@ -90,16 +95,13 @@ public class RequestUtils {
     private static class RequestUpdateExtrato extends AsyncTask<Void, Void, String> {
         private RequestComplete requestCompleteCallback;
         private int requestsPage;
-        private boolean updateAll;
         private final int mes;
         private final int ano;
 
         RequestUpdateExtrato(RequestComplete requestComplete,
-                             int requestsPages,
-                             boolean updateAll) {
+                             int requestsPages) {
             this.requestCompleteCallback = requestComplete;
             this.requestsPage = requestsPages;
-            this.updateAll = updateAll;
 
             ExtratoData extratoDataInstance = ExtratoData.getInstance();
             this.mes = extratoDataInstance.getCurrentMes();
@@ -146,29 +148,60 @@ public class RequestUtils {
                     }
                     extratoDataInstance.updateComprasSet(compras, requestsPage);
                     requestCompleteCallback.onSuccess();
-
-                    if(updateAll) updateAll();
                 } catch (JSONException e) {
                     requestCompleteCallback.onFail();
                     e.printStackTrace();
                 }
             }
         }
+    }
 
-        private void updateAll() {
-            ExtratoData extratoData = ExtratoData.getInstance();
-            if (extratoData.getPagesNumber() > requestsPage) {
-               List<AsyncTask<Void, Void, String>> listRequests = new ArrayList<>();
+    private static class RequestUsoCartao extends AsyncTask<Void, Void, String> {
+        private RequestComplete requestCompleteCallback;
 
-               for (int i = requestsPage + 1; i <= extratoData.getPagesNumber(); i++) {
-                   listRequests.add(new RequestUpdateExtrato(requestCompleteCallback, i, false));
-               }
+        RequestUsoCartao(RequestComplete requestComplete) {
+            this.requestCompleteCallback = requestComplete;
+        }
 
-               for(AsyncTask<Void, Void, String> asyncTask : listRequests) {
-                   asyncTask.execute();
-               }
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestPackage rpExtrato = new RequestPackage();
+            rpExtrato.setUri(USO_CARTAO_URI);
+            return HttpManager.getData(rpExtrato);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (result.equals("ERROR")) {
+                requestCompleteCallback.onFail();
+            } else {
+                try {
+                    JSONObject extratoJsonObject = new JSONObject(result);
+                    JSONArray extratoJsonArray = extratoJsonObject.getJSONArray("purchases");
+
+                    List<Compras> compras = new ArrayList<>();
+                    for (int z = 0; z < extratoJsonArray.length(); z++) {
+                        JSONObject jsonExtratoObject = extratoJsonArray.getJSONObject(z);
+                        Compras compra = new Compras(
+                                jsonExtratoObject.getString("date"),
+                                jsonExtratoObject.getString("store"),
+                                jsonExtratoObject.getString("description"),
+                                jsonExtratoObject.getDouble("value")
+                        );
+
+                        compras.add(compra);
+                    }
+//                    extratoDataInstance.updateComprasSet(compras, requestsPage);
+                    requestCompleteCallback.onSuccess();
+                } catch (JSONException e) {
+                    requestCompleteCallback.onFail();
+                    e.printStackTrace();
+                }
             }
         }
     }
+
 
 }

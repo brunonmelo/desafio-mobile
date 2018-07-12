@@ -49,7 +49,7 @@ public class ExtratoFragment extends Fragment implements RequestComplete {
 
         ExtratoData extratoDataInstance = ExtratoData.getInstance();
         if (extratoDataInstance.getComprasList(position) == null) {
-            RequestUtils.updateExtrato(this, position, false);
+            RequestUtils.updateExtrato(this, position);
         } else{
             updateLayout();
         }

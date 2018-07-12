@@ -107,7 +107,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
                 FiltroDialogFragment filtroDialogFragment =
                         FiltroDialogFragment.newInstance((AcaoConcluida) () -> {
                             showProgressDialog();
-                            RequestUtils.updateExtrato(this, 1, false);
+                            RequestUtils.updateExtrato(this, 1);
                             itemAtual = 1;
                         });
                 filtroDialogFragment.show(getSupportFragmentManager(), "filtro_extrato");
@@ -165,7 +165,7 @@ public class ExtratoActivity extends AppCompatActivity implements RequestComplet
         chartCard.onResume();
 
         if (ExtratoData.getInstance().getComprasList(itemAtual) == null) {
-            RequestUtils.updateExtrato(this,1, false);
+            RequestUtils.updateExtrato(this,1);
         } else {
             setupViewPage();
         }

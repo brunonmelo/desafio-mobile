@@ -41,7 +41,7 @@ public class ChartCard implements RequestComplete{
     public void onResume() {
         ExtratoData extratoData = ExtratoData.getInstance();
         if (extratoData.getPagesNumber() != extratoData.getExtratoMapListSize()) {
-            RequestUtils.updateExtrato(this, 1, true);
+            RequestUtils.updateExtrato(this, 1);
         } else {
             onSuccess();
         }
